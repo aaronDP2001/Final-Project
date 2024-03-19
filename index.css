@@ -545,7 +545,7 @@
   width: 182px;
   height: 15px;
 }
-.adam-parent,
+.frame-child11,
 .person,
 .person1,
 .person2 {
@@ -555,16 +555,167 @@
   width: 205px;
   height: 29px;
 }
-.adam-parent,
+.frame-child11,
 .person1,
 .person2 {
   top: 578px;
 }
-.adam-parent,
+.frame-child11,
 .person2 {
   top: 622px;
 }
+.frame-child11 {
+  top: 157px;
+  left: 4px;
+  border-radius: var(--br-xl);
+  background-color: #f4f4f4;
+  width: 693px;
+  height: 112px;
+}
+.frame-child12,
+.hyf-input {
+  position: absolute;
+  top: 164px;
+}
+.frame-child12 {
+  left: 21px;
+  border-radius: 50%;
+  width: 39px;
+  height: 40px;
+  object-fit: cover;
+}
+.hyf-input {
+  border: 1px solid var(--color-black);
+  outline: 0;
+  background-color: #f0f2f5;
+  left: 77px;
+  border-radius: var(--br-11xl);
+  box-sizing: border-box;
+  width: 604px;
+  height: 35px;
+}
+.activity-button-child {
+  position: absolute;
+  top: 0;
+  left: 8px;
+  border-radius: var(--br-xl);
+  background-color: var(--color-darkcyan);
+  width: 153px;
+  height: 39px;
+}
+.smiling-icon {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  width: 58px;
+  height: 33px;
+  object-fit: cover;
+}
+.activity {
+  position: absolute;
+  top: 9px;
+  left: 54px;
+  font-size: var(--font-size-mid);
+  font-family: var(--font-goldman);
+  color: var(--color-white);
+  text-align: left;
+  display: inline-block;
+  width: 107px;
+  height: 25px;
+}
+.activity-button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 222px;
+  left: 488px;
+  width: 161px;
+  height: 39px;
+}
+.activity-button:hover {
+  animation: 0.3s linear 0s 1 normal forwards shadow-drop-bottom;
+  opacity: 1;
+}
+.photos-button-child {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--br-xl);
+  background-color: var(--color-darkcyan);
+  width: 153px;
+  height: 39px;
+}
+.camera-icon {
+  position: absolute;
+  top: 4px;
+  left: 5px;
+  width: 36px;
+  height: 30px;
+  object-fit: cover;
+}
+.photos {
+  position: absolute;
+  top: 9px;
+  left: 49px;
+  font-size: var(--font-size-mid);
+  font-family: var(--font-goldman);
+  color: var(--color-white);
+  text-align: left;
+  display: inline-block;
+  width: 97px;
+  height: 29px;
+}
+.photos-button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 222px;
+  left: 274px;
+  width: 153px;
+  height: 39px;
+}
+.live-vid-btn:hover,
+.photos-button:hover {
+  animation: 0.3s ease 0s 1 normal forwards shadow-drop-bottom;
+  opacity: 1;
+}
+.video-record-icon {
+  position: absolute;
+  top: 2px;
+  left: 4px;
+  width: 33px;
+  height: 36px;
+  object-fit: cover;
+}
+.live-video {
+  position: absolute;
+  top: 10px;
+  left: 41px;
+  font-size: var(--font-size-mid);
+  font-family: var(--font-goldman);
+  color: var(--color-white);
+  text-align: left;
+  display: inline-block;
+  width: 105px;
+  height: 30px;
+}
+.live-vid-btn {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 221px;
+  left: 56px;
+  width: 153px;
+  height: 40px;
+}
 .adam-parent {
+  position: absolute;
   top: 36px;
   left: 416px;
   width: 1139px;
@@ -579,7 +730,7 @@
   border-radius: var(--br-xl);
   background-color: #e3fefa;
   width: 686px;
-  height: 605px;
+  height: 504px;
 }
 .post-child {
   position: absolute;
@@ -710,39 +861,87 @@
   width: 18px;
   height: 12px;
 }
-.fire-icon,
+.share-icon {
+  top: 0;
+  left: 0;
+  width: 27px;
+  height: 22px;
+  object-fit: cover;
+}
+.div2,
+.share,
 .share-icon {
   position: absolute;
-  top: 212px;
-  left: 455px;
-  width: 129px;
+}
+.div2 {
+  top: 1px;
+  left: 27px;
+  display: inline-block;
+  width: 22px;
+  height: 11px;
+}
+.share {
+  top: 217px;
+  left: 558px;
+  width: 49px;
+  height: 22px;
+}
+.fire-icon {
+  top: 0;
+  left: 0;
+  width: 19px;
   height: 25px;
   object-fit: cover;
 }
-.share-icon {
-  top: 215px;
-  left: 533px;
-  width: 62px;
-  height: 22px;
-}
-.div2 {
-  top: 218px;
-  left: 535px;
-  display: inline-block;
-  width: 16px;
-  height: 14px;
-}
-.div2,
 .div3,
-.post {
+.fire-icon,
+.like {
   position: absolute;
 }
 .div3 {
-  top: 218px;
-  left: 580px;
+  top: 6px;
+  left: 21px;
   display: inline-block;
-  width: 17px;
-  height: 11px;
+  width: 22px;
+  height: 14px;
+}
+.like {
+  top: 212px;
+  left: 457px;
+  width: 43px;
+  height: 25px;
+}
+.icon-favorite-dislike-1-rewar {
+  position: absolute;
+  height: 94.44%;
+  width: 42.86%;
+  top: 5.56%;
+  right: 57.14%;
+  bottom: 0;
+  left: 0;
+  max-width: 100%;
+  overflow: hidden;
+  max-height: 100%;
+}
+.div4 {
+  top: 0;
+  left: 24px;
+  display: inline-block;
+  width: 18px;
+  height: 16px;
+}
+.dislike,
+.div4,
+.post {
+  position: absolute;
+}
+.dislike {
+  height: 6.47%;
+  width: 6.85%;
+  top: 78.78%;
+  right: 9.62%;
+  bottom: 14.75%;
+  left: 83.52%;
 }
 .post {
   top: 15px;
@@ -764,10 +963,10 @@
 }
 .content-share {
   position: absolute;
-  top: 204px;
-  left: 442px;
+  top: 319px;
+  left: 428px;
   width: 686px;
-  height: 605px;
+  height: 505px;
   overflow: hidden;
   font-size: var(--font-size-3xs);
   font-family: var(--font-kadwa);
@@ -829,10 +1028,13 @@
 .friends-btn,
 .notes-btn-child {
   position: absolute;
-  top: 14px;
-  left: 94px;
   width: 38px;
   height: 35px;
+}
+.friends-btn {
+  top: 14px;
+  left: 94px;
+  cursor: pointer;
 }
 .notes-btn-child {
   top: 0;
