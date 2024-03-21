@@ -13,7 +13,12 @@
 .note-making-item {
   top: 0;
   left: 70.5px;
-  background-color: #f3f2f1;
+  background: linear-gradient(
+    90.17deg,
+    #93a5cf,
+    rgba(111, 214, 255, 0.6),
+    rgba(228, 239, 233, 0.6)
+  );
   width: 1468.6px;
   height: 827px;
 }
@@ -51,7 +56,7 @@
 .new-child2 {
   top: 699.7px;
 }
-.logo-icon3 {
+.logo-icon6 {
   position: absolute;
   top: 0;
   left: 1px;
@@ -61,7 +66,7 @@
   object-fit: cover;
 }
 .new-child3,
-.search-icon3 {
+.search-icon4 {
   position: absolute;
   left: 74px;
 }
@@ -72,25 +77,25 @@
   width: 210px;
   height: 42.7px;
 }
-.search-icon3 {
+.search-icon4 {
   top: 15.9px;
   width: 33px;
   height: 31.8px;
   object-fit: cover;
 }
-.currently-live3,
-.search3 {
+.currently-live4,
+.search4 {
   position: absolute;
   display: inline-block;
 }
-.search3 {
+.search4 {
   top: 22.9px;
   left: 112px;
   font-family: var(--font-inter);
   width: 181px;
   height: 19.9px;
 }
-.currently-live3 {
+.currently-live4 {
   top: 84.5px;
   left: 23px;
   font-weight: 500;
@@ -165,14 +170,14 @@
 .new-child13 {
   top: 178.9px;
 }
-.channel-13 {
+.channel-14 {
   white-space: pre-wrap;
 }
-.live7 {
+.live9 {
   color: var(--color-gray-300);
 }
-.channel-1-live-container3,
-.channel-2-live-container3 {
+.channel-1-live-container4,
+.channel-2-live-container4 {
   position: absolute;
   top: 135.2px;
   left: 68px;
@@ -181,14 +186,14 @@
   width: 214px;
   height: 15.9px;
 }
-.channel-2-live-container3 {
+.channel-2-live-container4 {
   top: 185.8px;
 }
-.brooklyn-simmons3,
-.darrell-steward6,
-.friends3,
-.john-doe7,
-.subscriptions3 {
+.brooklyn-simmons4,
+.darrell-steward8,
+.friends4,
+.john-doe9,
+.subscriptions4 {
   position: absolute;
   top: 243.5px;
   left: 23px;
@@ -197,35 +202,35 @@
   width: 205px;
   height: 15.9px;
 }
-.brooklyn-simmons3,
-.darrell-steward6,
-.friends3,
-.john-doe7 {
+.brooklyn-simmons4,
+.darrell-steward8,
+.friends4,
+.john-doe9 {
   top: 542.6px;
 }
-.brooklyn-simmons3,
-.darrell-steward6,
-.john-doe7 {
+.brooklyn-simmons4,
+.darrell-steward8,
+.john-doe9 {
   top: 291.2px;
   left: 68px;
   width: 82px;
   height: 17.9px;
 }
-.brooklyn-simmons3,
-.darrell-steward6 {
+.brooklyn-simmons4,
+.darrell-steward8 {
   top: 341.9px;
   width: 124px;
 }
-.brooklyn-simmons3 {
+.brooklyn-simmons4 {
   top: 391.6px;
   width: 133px;
   height: 19.9px;
 }
-.arlene-mccoy3,
-.darrell-steward7,
-.jerome-bell4,
-.kathryn-murphy3,
-.theresa-webb3 {
+.arlene-mccoy4,
+.darrell-steward9,
+.jerome-bell5,
+.kathryn-murphy4,
+.theresa-webb4 {
   position: absolute;
   top: 443.2px;
   left: 68px;
@@ -234,27 +239,27 @@
   width: 133px;
   height: 17.9px;
 }
-.darrell-steward7,
-.jerome-bell4,
-.kathryn-murphy3,
-.theresa-webb3 {
+.darrell-steward9,
+.jerome-bell5,
+.kathryn-murphy4,
+.theresa-webb4 {
   top: 490px;
   width: 103px;
 }
-.darrell-steward7,
-.kathryn-murphy3,
-.theresa-webb3 {
+.darrell-steward9,
+.kathryn-murphy4,
+.theresa-webb4 {
   top: 593.3px;
   width: 116px;
   height: 14.9px;
 }
-.darrell-steward7,
-.theresa-webb3 {
+.darrell-steward9,
+.theresa-webb4 {
   top: 643px;
   width: 103px;
   height: 17.9px;
 }
-.darrell-steward7 {
+.darrell-steward9 {
   top: 691.7px;
 }
 .new {

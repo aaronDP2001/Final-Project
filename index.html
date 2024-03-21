@@ -16,11 +16,11 @@
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Goldman:wght@400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap"
     />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Kadwa:wght@400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Kadwa:wght@400;700&display=swap"
     />
   </head>
   <body>
@@ -28,8 +28,6 @@
       <div class="main-child"></div>
       <div class="main-item"></div>
       <img class="doorbell-icon" alt="" src="./public/doorbell@2x.png" />
-
-      <img class="main-inner" alt="" src="./public/ellipse-22@2x.png" />
 
       <div class="rectangle-parent">
         <div class="frame-child"></div>
@@ -170,13 +168,18 @@
 
           <div class="activity">ACTIVITY</div>
         </button>
-        <button class="photos-button" autofocus="{true}">
+        <button
+          class="photos-button"
+          autofocus="{true}"
+          accept="image/*"
+          id="photosButton"
+        >
           <div class="photos-button-child"></div>
           <img class="camera-icon" alt="" src="./public/camera@2x.png" />
 
           <div class="photos">PHOTOS</div>
         </button>
-        <button class="live-vid-btn" autofocus="{true}">
+        <button class="live-vid-btn">
           <div class="photos-button-child"></div>
           <img
             class="video-record-icon"
@@ -263,9 +266,109 @@
           <img class="clock-icon" alt="" src="./public/clock@2x.png" />
         </div>
       </div>
+      <img
+        class="main-inner"
+        alt=""
+        src="./public/ellipse-22@2x.png"
+        id="ellipseIcon"
+      />
+    </div>
+
+    <div id="photoPopup" class="popup-overlay" style="display: none">
+      <div class="photo-popup">
+        <div class="photo-popup-child"></div>
+        <div class="photo-popup-item"></div>
+        <img
+          class="logo-icon3"
+          alt=""
+          src="./public/logo2@2x.png"
+          id="popuplogoImage"
+        />
+
+        <div class="title1">
+          <div class="username1">USERNAME</div>
+        </div>
+        <button class="submit2" id="submit">
+          <div class="submit-item"></div>
+          <div class="post4">POST</div>
+        </button>
+        <div class="upload-group">
+          <input class="upload1" required="{true}" type="file" />
+
+          <div class="profile-picture1">PROFILE PICTURE</div>
+        </div>
+        <div class="description1">
+          <textarea
+            class="description-item"
+            placeholder="ENTER DESCRIPTION"
+            autofocus="{true}"
+            form
+          >
+          </textarea>
+          <div class="username1">DESCRIPTION</div>
+        </div>
+        <img
+          class="profile-pic-icon"
+          alt=""
+          src="./public/profile-pic@2x.png"
+        />
+      </div>
     </div>
 
     <script>
+      var popuplogoImage = document.getElementById("popuplogoImage");
+      if (popuplogoImage) {
+        popuplogoImage.addEventListener("click", function (e) {
+          window.location.href = "./Main.html";
+        });
+      }
+      
+      var popupsUBMIT = document.getElementById("submit");
+      if (popupsUBMIT) {
+        popupsUBMIT.addEventListener("click", function (e) {
+          var popup = e.currentTarget.parentNode;
+          function isOverlay(node) {
+            return !!(
+              node &&
+              node.classList &&
+              node.classList.contains("popup-overlay")
+            );
+          }
+          while (popup && !isOverlay(popup)) {
+            popup = popup.parentNode;
+          }
+          if (isOverlay(popup)) {
+            popup.style.display = "none";
+          }
+        });
+      }
+      
+      var photosButton = document.getElementById("photosButton");
+      if (photosButton) {
+        photosButton.addEventListener("click", function () {
+          var popup = document.getElementById("photoPopup");
+          if (!popup) return;
+          var popupStyle = popup.style;
+          if (popupStyle) {
+            popupStyle.display = "flex";
+            popupStyle.zIndex = 100;
+            popupStyle.backgroundColor = "rgba(113, 113, 113, 0.3)";
+            popupStyle.alignItems = "center";
+            popupStyle.justifyContent = "center";
+          }
+          popup.setAttribute("closable", "");
+      
+          var onClick =
+            popup.onClick ||
+            function (e) {
+              if (e.target === popup && popup.hasAttribute("closable")) {
+                popupStyle.display = "none";
+              }
+            };
+          popup.addEventListener("click", onClick);
+        });
+      }
+      
       var postContainer = document.getElementById("postContainer");
       if (postContainer) {
         postContainer.addEventListener("click", function (e) {
@@ -284,6 +387,13 @@
       if (notesBtnContainer) {
         notesBtnContainer.addEventListener("click", function (e) {
           window.location.href = "./NoteSharing.html";
+        });
+      }
+      
+      var ellipseIcon = document.getElementById("ellipseIcon");
+      if (ellipseIcon) {
+        ellipseIcon.addEventListener("click", function (e) {
+          window.location.href = "./ProfilePage.html";
         });
       }
       var scrollAnimElements = document.querySelectorAll("[data-animate-on-scroll]");
