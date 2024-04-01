@@ -253,7 +253,7 @@
           <div class="friends-btn-child"></div>
           <img class="category-icon" alt="" src="./public/category@2x.png" />
         </div>
-        <div class="chat-btn">
+        <div class="chat-btn" id="chatBtnContainer">
           <div class="chat-btn-child"></div>
           <img
             class="chat-bubble-icon"
@@ -380,6 +380,13 @@
       if (friendsBtnContainer) {
         friendsBtnContainer.addEventListener("click", function (e) {
           window.location.href = "./Frame5.html";
+        });
+      }
+
+      var chatBtnContainer = document.getElementById("chatBtnContainer");
+      if (chatBtnContainer) {
+        chatBtnContainer.addEventListener("click", function (e) {
+          window.location.href = "./lobby.html";
         });
       }
       
