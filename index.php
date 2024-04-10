@@ -29,7 +29,7 @@ include "header.php";
 							$psw = md5($psw);
 							$login = $user->fct_login($username, $psw);
 							if($login){
-								header('Location: index.html');
+								header('Location: index1.php');
 							}else{
 								echo "<p style='color:red;text-align:center'>Incorrect Username or password</p>";
 							}
