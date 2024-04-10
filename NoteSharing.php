@@ -8,6 +8,9 @@ require_once "php/functions.php";
 ?>
 <!DOCTYPE html>
 <html>
+<script type="text/javascript">
+      window.history.forward();
+    </script>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -340,7 +343,7 @@ require_once "php/functions.php";
       var homeBtn = document.getElementById("Home");
       if (homeBtn) {
         homeBtn.addEventListener("click", function (e) {
-          window.location.href = "./frontpage.php";
+          window.location.href = "./index1.php";
         });
       }
       

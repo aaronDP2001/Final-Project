@@ -1,3 +1,9 @@
+<?php
+ob_start ();
+session_start();
+require "php/config.php";
+require_once "php/functions.php";
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,7 +50,7 @@
  
                  <div class="form__field__wrapper">
                      <label>Your Name</label>
-                     <input type="text" name="name" required placeholder="Enter your display name..." />
+                     <input type="text" name="name" required placeholder="Enter your display name..." value="<?php echo $_SESSION['f_uname'];?>" disabled/>
                  </div>
  
                  <div class="form__field__wrapper">
