@@ -1,9 +1,25 @@
 <?php
-ob_start ();
+ob_start();
 session_start();
 require "php/config.php";
 require_once "php/functions.php";
 
+if (!isset($_SESSION['f_uname'])) {
+
+    header("Location: login.php");
+    exit;
+}
+
+$db = mysqli_connect("localhost", "root", "", "learnsync");
+$username = $_SESSION['f_uname'];
+
+$query = "SELECT * FROM mod_reg WHERE username = '$username' AND privilege='moderator'";
+$result = mysqli_query($db, $query);
+$isModerator = mysqli_num_rows($result) > 0;
+
+$query = "SELECT * FROM registration WHERE username = '$username'AND privilege='student'";
+$result = mysqli_query($db, $query);
+$isStudent = mysqli_num_rows($result) > 0;
 
 ?>
 
@@ -293,6 +309,10 @@ require_once "php/functions.php";
         <div class="clock-btn">
           <div class="friends-btn-child"></div>
           <img class="clock-icon" alt="" src="./public/clock@2x.png" />
+        </div>
+          <div class="admin-dash-btn" id="admindashBtnContainer" <?php if (!$isModerator) echo 'style="display: none;"'; ?>>
+          <div class="admins-dash-btn-child"></div>
+          <img class="clock-icon" alt="" src="./public/admin.png" />
         </div>
       </div>
       <img
@@ -587,6 +607,12 @@ require_once "php/functions.php";
           window.location.href = "./ProfilePage.html";
         });
       }
+      var admindashBtnContainer = document.getElementById("admindashBtnContainer");
+      if (admindashBtnContainer) {
+        admindashBtnContainer.addEventListener("click", function (e) {
+          window.location.href = "./admin-dash.php";
+        });
+      }
       var scrollAnimElements = document.querySelectorAll("[data-animate-on-scroll]");
       var observer = new IntersectionObserver(
         (entries) => {
@@ -606,6 +632,7 @@ require_once "php/functions.php";
       for (let i = 0; i < scrollAnimElements.length; i++) {
         observer.observe(scrollAnimElements[i]);
       }
+
       </script>
   </body>
 </html>
