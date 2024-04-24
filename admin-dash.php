@@ -16,11 +16,12 @@ $con->close();
 
 
 
-
-
-<table class="table">
-            <thead>
-                  <tr>
+<!DOCTYPE html>
+<html>
+<body>
+  <table class="table">
+    <thead>
+      <tr>
                     <th scope="col">Username</th>
                     <th scope="col">Room Name</th>
                     <th scope="col">Time Created</th>
@@ -35,9 +36,19 @@ $con->close();
                     <td>".$rows['Name']."</td>
                     <td>". $rows['Room_name']."</td>
                     <td>". $rows['Time_created']."</td>
+                    <td><a href='delete.php?Room_name=$rows[Room_name]'>Delete</a></td>
                   </tr>
                   ";
                 }
             ?>                
                 </tbody>
-              </table>
+      </table>
+      <form action="stream_insert.php" method="POST">
+        <div>
+          <label>Create Room ID</label>
+          <input type="Message" name="roomName">
+        </div>
+        <button type="submit" >Create</button>
+              </form>
+              </body>
+              </html>
