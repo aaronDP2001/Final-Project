@@ -45,9 +45,7 @@ require_once "php/functions.php";
                  <p>👋 Create or Join Room</p>
              </div>
  
- 
-            <form id="lobby__form">
- 
+            <form id="lobby__form" action="validate_room.php" method="POST">
                  <div class="form__field__wrapper">
                      <label>Your Name</label>
                      <input type="text" name="name" required placeholder="Enter your display name..." value="<?php echo $_SESSION['f_uname'];?>" disabled/>
@@ -55,18 +53,43 @@ require_once "php/functions.php";
  
                  <div class="form__field__wrapper">
                      <label>Room Name</label>
-                     <input type="text" name="room"  placeholder="Enter room name..." />
+                     <input type="text" name="room" id="roomNameInput" placeholder="Enter room name..." />
                  </div>
  
                  <div class="form__field__wrapper">
-                     <button type="submit">Go to Room 
+                     <button type="button" id="validateButton">Validate</button>
+                     <button type="submit" id="goToRoomButton" disabled>Go to Room 
                          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M13.025 1l-2.847 2.828 6.176 6.176h-16.354v3.992h16.354l-6.176 6.176 2.847 2.828 10.975-11z"/></svg>
                     </button>
                  </div>
             </form>
         </div>
      </main>
+     <script type="text/javascript" src="js/lobby.js"></script>
+     <script>
+    document.getElementById('validateButton').addEventListener('click', function() {
+        var roomName = document.getElementById('roomNameInput').value;
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'validate_room.php');
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var response = xhr.responseText;
+                if (response.trim() === 'valid') {
+                    document.getElementById('goToRoomButton').disabled = false;
+                    alert('Room exists!');
+                } else {
+                    document.getElementById('goToRoomButton').disabled = true;
+                    alert('Room does not exist!');
+                }
+            } else {
+                alert('Error: ' + xhr.statusText);
+            }
+        };
+        xhr.send('room=' + encodeURIComponent(roomName));
+    });
     
+</script>
 </body>
-<script type="text/javascript" src="js/lobby.js"></script>
 </html>
