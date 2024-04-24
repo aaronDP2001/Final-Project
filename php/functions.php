@@ -105,6 +105,19 @@ class login_registration_class{
 			return false;
 		}
 	}
+	public function stream_insert(){
+		global $conn;
+		$fct = $conn->query("select Room_name from streams where Room_name='$room' ");
+		$count = $fct->num_rows;
+		if($count == 0){
+			$sql = "insert into streams(Room_name,Name) values('$room','$f_uname')";
+			$result = $conn->query($sql);
+			return true;
+		}else{
+			return false;
+		}
+
+	}
 	//get registration 
 	public function get_faculty_by_username($uname){
 		global $conn;
