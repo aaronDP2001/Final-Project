@@ -5,7 +5,7 @@
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
     <link rel="stylesheet" href="./global.css" />
-    <link rel="stylesheet" href="./FrontPage.css" />
+    <link rel="stylesheet" href="./index.css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap"
@@ -96,7 +96,7 @@
 
             <div class="photos">PHOTOS</div>
           </button>
-          <button class="live-vid-btn">
+          <button class="live-vid-btn" id="liveVidBtn">
             <div class="photos-button-child"></div>
             <img
               class="video-record-icon"
@@ -262,7 +262,7 @@
       <img
         class="main-inner"
         alt=""
-        src="./public/ellipse-22@2x.png"
+        src="./public/ellipse-221@2x.png"
         id="ellipseIcon"
       />
 
@@ -329,6 +329,41 @@
         <div class="woym-child"></div>
         <div class="woym-item"></div>
         <img
+          class="logo-icon10"
+          alt=""
+          src="./public/logo2@2x.png"
+          id="popuplogoImage"
+        />
+
+        <div class="title5">
+          <div class="username3">USERNAME</div>
+        </div>
+        <button class="submit6" id="submit">
+          <div class="submit-child2"></div>
+          <div class="post8">POST</div>
+        </button>
+        <div class="description9">
+          <textarea
+            class="description-child2"
+            placeholder="ENTER DESCRIPTION"
+            autofocus="{true}"
+          >
+          </textarea>
+          <div class="username3">DESCRIPTION</div>
+        </div>
+        <img
+          class="profile-pic-icon3"
+          alt=""
+          src="./public/profile-pic@2x.png"
+        />
+      </div>
+    </div>
+
+    <div id="photoPopup" class="popup-overlay" style="display: none">
+      <div class="photo-popup">
+        <div class="photo-popup-child"></div>
+        <div class="photo-popup-item"></div>
+        <img
           class="logo-icon9"
           alt=""
           src="./public/logo2@2x.png"
@@ -342,11 +377,17 @@
           <div class="submit-child1"></div>
           <div class="post7">POST</div>
         </button>
+        <div class="upload-parent1">
+          <input class="upload3" required="{true}" type="file" />
+
+          <div class="upload-picture">UPLOAD PICTURE</div>
+        </div>
         <div class="description7">
           <textarea
             class="description-child1"
             placeholder="ENTER DESCRIPTION"
             autofocus="{true}"
+            form
           >
           </textarea>
           <div class="username2">DESCRIPTION</div>
@@ -359,10 +400,10 @@
       </div>
     </div>
 
-    <div id="photoPopup" class="popup-overlay" style="display: none">
-      <div class="photo-popup">
-        <div class="photo-popup-child"></div>
-        <div class="photo-popup-item"></div>
+    <div id="vidPopup" class="popup-overlay" style="display: none">
+      <div class="vid-popup">
+        <div class="vid-popup-child"></div>
+        <div class="vid-popup-item"></div>
         <img
           class="logo-icon8"
           alt=""
@@ -380,7 +421,7 @@
         <div class="upload-container">
           <input class="upload2" required="{true}" type="file" />
 
-          <div class="upload-picture">UPLOAD PICTURE</div>
+          <div class="upload-video">UPLOAD VIDEO</div>
         </div>
         <div class="description5">
           <textarea
@@ -401,6 +442,33 @@
     </div>
 
     <script>
+      var popuplogoImage = document.getElementById("popuplogoImage");
+      if (popuplogoImage) {
+        popuplogoImage.addEventListener("click", function (e) {
+          window.location.href = "./Main.html";
+        });
+      }
+      
+      var popupsUBMIT = document.getElementById("submit");
+      if (popupsUBMIT) {
+        popupsUBMIT.addEventListener("click", function (e) {
+          var popup = e.currentTarget.parentNode;
+          function isOverlay(node) {
+            return !!(
+              node &&
+              node.classList &&
+              node.classList.contains("popup-overlay")
+            );
+          }
+          while (popup && !isOverlay(popup)) {
+            popup = popup.parentNode;
+          }
+          if (isOverlay(popup)) {
+            popup.style.display = "none";
+          }
+        });
+      }
+      
       var popuplogoImage = document.getElementById("popuplogoImage");
       if (popuplogoImage) {
         popuplogoImage.addEventListener("click", function (e) {
@@ -485,6 +553,32 @@
       if (photosButton) {
         photosButton.addEventListener("click", function () {
           var popup = document.getElementById("photoPopup");
+          if (!popup) return;
+          var popupStyle = popup.style;
+          if (popupStyle) {
+            popupStyle.display = "flex";
+            popupStyle.zIndex = 100;
+            popupStyle.backgroundColor = "rgba(113, 113, 113, 0.3)";
+            popupStyle.alignItems = "center";
+            popupStyle.justifyContent = "center";
+          }
+          popup.setAttribute("closable", "");
+      
+          var onClick =
+            popup.onClick ||
+            function (e) {
+              if (e.target === popup && popup.hasAttribute("closable")) {
+                popupStyle.display = "none";
+              }
+            };
+          popup.addEventListener("click", onClick);
+        });
+      }
+      
+      var liveVidBtn = document.getElementById("liveVidBtn");
+      if (liveVidBtn) {
+        liveVidBtn.addEventListener("click", function () {
+          var popup = document.getElementById("vidPopup");
           if (!popup) return;
           var popupStyle = popup.style;
           if (popupStyle) {
