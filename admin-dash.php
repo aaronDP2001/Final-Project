@@ -1,15 +1,4 @@
-<?php
-ob_start();
-session_start();
-$con = mysqli_connect("localhost", "root", "", "learnsync");
-if ($con->connect_error) {
-    die("Failed to connect : " . $con->connect_error);
-} else {
-    $sql = "SELECT * FROM `streams` ;";
-    $result = $con->query($sql);
-}
-$con->close();
-?>
+
 
 <?php
 ob_start();
@@ -41,19 +30,26 @@ $con->close();
       <?php
       while ($rows = $result->fetch_assoc()) {
           // Construct the room link
-          $roomLink = "http://localhost/Final-Project/room.html?room=" . $rows['Room_name'];
+          $roomCode = $rows['Room_name'];
           echo "
           <tr>
             <td>".$rows['Name']."</td>
             <td>".$rows['Room_name']."</td>
             <td>".$rows['Time_created']."</td>
-            <td><a href='".$roomLink."' target='_blank'>".$roomLink."</a></td> <!-- Display room link as a clickable hyperlink -->
+            <td>
+            <form id='lobby__form' data-name='".$rows['Name']."' data-room='".$rows['Room_name']."'>
+              <input type='hidden' name='name' value='".$rows['Name']."'>
+              <input type='hidden' name='room' value='".$rows['Room_name']."'>
+              <button type='submit'>Enter Room</button>
+            </form>
+          </td>
             <td><a href='delete.php?Room_name=".$rows['Room_name']."'>Delete</a></td>
           </tr>";
       }
       ?>
     </tbody>
   </table>
+  <script type="text/javascript" src="js/lobby.js"></script>
   <form action="stream_insert.php" method="POST">
     <div>
       <label>Create Room ID</label>
