@@ -8,7 +8,18 @@ if ($con->connect_error) {
     $sql = "SELECT * FROM `streams` ;";
     $result = $con->query($sql);
 }
+$isModerator = false;
+$username = $_SESSION['f_uname'];
 
+$query = "SELECT * FROM mod_reg WHERE username = '$username' AND privilege='moderator'";
+$res = mysqli_query($con, $query);
+$isModerator = mysqli_num_rows($res) > 0;
+
+// Check if the user is a student
+$isStudent = false;
+$query = "SELECT * FROM registration WHERE username = '$username'AND privilege='student'";
+$res = mysqli_query($con, $query);
+$isStudent = mysqli_num_rows($res) > 0;
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +56,7 @@ if ($con->connect_error) {
             </a> -->
 
         </div>
-        <button id="toggle-dash">Admin Dashboard</button>
+        <button id="toggle-dash"<?php if (!$isModerator) echo 'style="display: none;"'; ?>>Admin Dashboard</button>
             <div id="admin-dashboard-popup" class="admin-dashboard-popup">
                 <div class="admin-dashboard-content">
                     <h2>Admin Dashboard</h2>
