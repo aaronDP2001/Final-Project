@@ -1,3 +1,27 @@
+<?php
+ob_start();
+session_start();
+$con = mysqli_connect("localhost", "root", "", "learnsync");
+if ($con->connect_error) {
+    die("Failed to connect : " . $con->connect_error);
+} else {
+    $sql = "SELECT * FROM `streams` ;";
+    $result = $con->query($sql);
+}
+$isModerator = false;
+$username = $_SESSION['f_uname'];
+
+$query = "SELECT * FROM mod_reg WHERE username = '$username' AND privilege='moderator'";
+$res = mysqli_query($con, $query);
+$isModerator = mysqli_num_rows($res) > 0;
+
+// Check if the user is a student
+$isStudent = false;
+$query = "SELECT * FROM registration WHERE username = '$username'AND privilege='student'";
+$res = mysqli_query($con, $query);
+$isStudent = mysqli_num_rows($res) > 0;
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,6 +56,48 @@
             </a> -->
 
         </div>
+        <button id="toggle-dash"<?php if (!$isModerator) echo 'style="display: none;"'; ?>>Admin Dashboard</button>
+            <div id="admin-dashboard-popup" class="admin-dashboard-popup">
+                <div class="admin-dashboard-content">
+                    <h2>Admin Dashboard</h2>
+                    <body>
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Username</th>
+        <th scope="col">Room Name</th>
+        <th scope="col">Time Created</th>
+        <th scope="col">Room Link</th> <!-- New column for Room Link -->
+        <th scope="col">Actions</th> <!-- Column for Delete Action -->
+      </tr>
+    </thead>
+    <tbody>
+      <?php
+      while ($rows = $result->fetch_assoc()) {
+          // Construct the room link
+          $roomCode = $rows['Room_name'];
+          echo "
+          <tr>
+            <td>".$rows['Name']."</td>
+            <td>".$rows['Room_name']."</td>
+            <td>".$rows['Time_created']."</td>
+            <td>
+            <form id='lobby__form' data-name='".$rows['Name']."' data-room='".$rows['Room_name']."'>
+              <input type='hidden' name='name' value='".$rows['Name']."'>
+              <input type='hidden' name='room' value='".$rows['Room_name']."'>
+              <button type='submit'>Enter Room</button>
+            </form>
+          </td>
+            <td><a href='delete.php?Room_name=".$rows['Room_name']."'>Delete</a></td>
+          </tr>";
+      }
+      ?>
+    </tbody>
+  </table>
+  <script type="text/javascript" src="js/lobby.js"></script>
+                </div>
+                <span class="admin-dashboard-close">&times;</span>
+            </div>
     </header>
 
     <main class="container">
@@ -69,6 +135,9 @@
                     <button id="screen-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 1v17h24v-17h-24zm22 15h-20v-13h20v13zm-6.599 4l2.599 3h-12l2.599-3h6.802z"/></svg>
                     </button>
+                    <button id="record-btn">Start recording</button>
+                    <button id="stop-record-btn">Stop recording</button>
+                    <button id="download-btn">Download</button>
                     <button id="leave-btn" style="background-color: #FF5050;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16 10v-5l8 7-8 7v-5h-8v-4h8zm-16-8v20h14v-2h-12v-16h12v-2h-14z"/></svg>
                     </button>
@@ -95,4 +164,5 @@
 <script type="text/javascript" src="js/room.js"></script>
 <script type="text/javascript" src="js/room_rtm.js"></script>
 <script type="text/javascript" src="js/room_rtc.js"></script>
+<script type="text/javascript" src="js/admin-popup.js"></script>
 </html>
