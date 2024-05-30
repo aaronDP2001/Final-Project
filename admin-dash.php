@@ -7,8 +7,7 @@ if($con->connect_error)
     die("Failed to connect : ".$con->connect_error);
 }
 else{
-$sql = "SELECT *
-FROM `streams` ;";
+$sql = "SELECT * FROM `streams` ;";
 $result = $con->query($sql);
 }
 $con->close();

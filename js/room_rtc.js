@@ -11,7 +11,8 @@ let client;
 
 let rtmClient;
 let channel;
-
+let mediaRecorder;
+let recordedBlobs;
 const queryString = window.location.search
 const urlParams = new URLSearchParams(queryString)
 let roomId = urlParams.get('room')
@@ -21,9 +22,6 @@ if(!roomId){
 }
 
 let displayName = sessionStorage.getItem('display_name')
-if(!displayName){
-    window.location = 'lobby.html'
-}
 
 let localTracks = []
 let remoteUsers = {}
@@ -213,7 +211,35 @@ let toggleScreen = async (e) => {
         switchToCamera()
     }
 }
-
+let startRecording =async(e) => {
+    console.log("startRecording")
+    const mediaStream = new MediaStream([localTracks[0].getMediaStreamTrack(), localTracks[1].getMediaStreamTrack()]);
+    recordedBlobs = [];
+    mediaRecorder = new MediaRecorder(mediaStream)
+    mediaRecorder.ondataavailable = e=>{
+        console.log("data is available")
+        recordedBlobs.push(e.data)
+    }
+    mediaRecorder.start();
+}
+let stopRecording =async(e) => {
+    console.log("stopRecording")
+    mediaRecorder.stop()
+}
+let download =async(e) => {
+    console.log("Downloaded")
+    const blob = new Blob(recordedBlobs,{type:'video/webm'});
+    const url =window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.style.display = 'none';
+    a.href = url;
+    a.download = 'webrtc_record.webm';
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(()=>{document.body.removeChild(a)
+        window.URL.revokeObjectURL(url);
+    },100);
+}
 let leaveStream = async (e) => {
     e.preventDefault()
 
@@ -252,6 +278,7 @@ document.getElementById('mic-btn').addEventListener('click', toggleMic)
 document.getElementById('screen-btn').addEventListener('click', toggleScreen)
 document.getElementById('join-btn').addEventListener('click', joinStream)
 document.getElementById('leave-btn').addEventListener('click', leaveStream)
-
-
+document.getElementById('record-btn').addEventListener('click',startRecording )
+document.getElementById('stop-record-btn').addEventListener('click',stopRecording )
+document.getElementById('download-btn').addEventListener('click',download )
 joinRoomInit()
