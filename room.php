@@ -14,6 +14,7 @@ $username = $_SESSION['f_uname'];
 $query = "SELECT * FROM mod_reg WHERE username = '$username' AND privilege='moderator'";
 $res = mysqli_query($con, $query);
 $isModerator = mysqli_num_rows($res) > 0;
+$moderatorName = $isModerator ? $username : '';
 
 // Check if the user is a student
 $isStudent = false;
@@ -30,7 +31,6 @@ $isStudent = mysqli_num_rows($res) > 0;
     <title>Room</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <link rel='stylesheet' type='text/css' media='screen' href='styles/main.css'>
-
     <link rel='stylesheet' type='text/css' media='screen' href='styles/room.css'>
 </head>
 <body>
@@ -157,12 +157,18 @@ $isStudent = mysqli_num_rows($res) > 0;
             
         </div>
     </main>
-    
+
+    <!-- Pass PHP variables to JavaScript -->
+    <script type="text/javascript">
+        const isModerator = <?php echo json_encode($isModerator); ?>;
+        const moderatorName = <?php echo json_encode($moderatorName); ?>;
+    </script>
+
+    <script type="text/javascript" src="js/AgoraRTC_N-4.11.0.js"></script>
+    <script type="text/javascript" src="js/agora-rtm-sdk-1.4.4.js"></script>
+    <script type="text/javascript" src="js/room.js"></script>
+    <script type="text/javascript" src="js/room_rtm.js"></script>
+    <script type="text/javascript" src="js/room_rtc.js"></script>
+    <script type="text/javascript" src="js/admin-popup.js"></script>
 </body>
-<script type="text/javascript" src="js/AgoraRTC_N-4.11.0.js"></script>
-<script type="text/javascript" src="js/agora-rtm-sdk-1.4.4.js"></script>
-<script type="text/javascript" src="js/room.js"></script>
-<script type="text/javascript" src="js/room_rtm.js"></script>
-<script type="text/javascript" src="js/room_rtc.js"></script>
-<script type="text/javascript" src="js/admin-popup.js"></script>
 </html>
