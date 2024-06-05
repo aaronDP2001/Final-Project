@@ -12,7 +12,7 @@ $target = "images/".basename($_FILES['image']['name']);
   		$msg = "Failed to upload image";
   	}
 	$img_size = $_FILES['image']['size'];
-	if ($img_size > 125000) {
+	if ($img_size > 1048576) {
 			$em = "Sorry, your file is too large.";
 		    header("Location: NoteSharing.php?error=$em");
 		}
