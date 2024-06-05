@@ -203,7 +203,7 @@ require_once "php/functions.php";
 	       <div class="post-main-div" id="Post Main Div"></div> -->
              
          <div class="post5">
-        <a href = "<?php echo $file_path; ?>">
+        <a href = "<?php echo $file_path; ?>" target="_blank">
       <img class="post-child21" alt="" src="./public/ellipse-20@2x.png" />
         <div class="post-background"></div>
 		<?php if ($row['subject']=="Compiler Design") {
