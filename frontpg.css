@@ -1606,3 +1606,9 @@
   color: var(--color-black);
   font-family: var(--font-kadwa);
 }
+.popup-overlay {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    inset: 0;
+}

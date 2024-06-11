@@ -33,7 +33,7 @@ $isStudent = mysqli_num_rows($result) > 0;
     <meta name="viewport" content="initial-scale=1, width=device-width" />
 
     <link rel="stylesheet" href="./global.css" />
-    <link rel="stylesheet" href="./frontpg.css?<?php echo time();?>" />
+    <link rel="stylesheet" href="./frontpg.css?<?php echo time();?>F" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=IBM Plex Sans Hebrew:wght@500&display=swap"
@@ -57,33 +57,7 @@ $isStudent = mysqli_num_rows($result) > 0;
       <div class="main-item"></div>
       <img class="doorbell-icon" alt="" src="./public/doorbell@2x.png" />
 
-      <div class="qui-parent">
-        <div class="qui">
-          <img class="qui-child" alt="" src="./public/ellipse-15@2x.png" />
-
-          <div class="quinn">Quinn</div>
-        </div>
-        <div class="alex">
-          <img class="qui-child" alt="" src="./public/ellipse-16@2x.png" />
-
-          <div class="alex1">Alex</div>
-        </div>
-        <div class="sar">
-          <img class="qui-child" alt="" src="./public/ellipse-17@2x.png" />
-
-          <div class="quinn">Sarah</div>
-        </div>
-        <div class="sel">
-          <img class="qui-child" alt="" src="./public/ellipse-19@2x.png" />
-
-          <div class="quinn">Slevy</div>
-        </div>
-        <div class="seb">
-          <img class="seb-child" alt="" src="./public/ellipse-18@2x.png" />
-
-          <div class="sebastian">Sebastian</div>
-        </div>
-      </div>
+      
       <div class="adam-parent">
         <div class="adam"><?php echo $_SESSION['f_uname'];?></div>
         <div class="live">
@@ -133,12 +107,12 @@ $isStudent = mysqli_num_rows($result) > 0;
         <img class="frame-item" alt="" src="./public/ellipse-23@2x.png" />
 
         <button class="hyf-input" id="hYFInput"></button>
-        <button class="activity-button" autofocus="{true}">
+        <!--<button class="activity-button" autofocus="{true}">
           <div class="activity-button-child"></div>
-          <img class="smiling-icon" alt="" src="./public/smiling@2x.png" />
+         <img class="smiling-icon" alt="" src="./public/smiling@2x.png" />
 
           <div class="activity">ACTIVITY</div>
-        </button>
+        </button>-->
         <button
           class="photos-button"
           autofocus="{true}"
@@ -148,9 +122,9 @@ $isStudent = mysqli_num_rows($result) > 0;
           <div class="photos-button-child"></div>
           <img class="camera-icon" alt="" src="./public/camera@2x.png" />
 
-          <div class="photos">PHOTOS</div>
+          <div class="photos">PHOTO/VIDEO</div>
         </button>
-        <button class="live-vid-btn">
+        <!--<button class="live-vid-btn">
           <div class="photos-button-child"></div>
           <img
             class="video-record-icon"
@@ -158,8 +132,8 @@ $isStudent = mysqli_num_rows($result) > 0;
             src="./public/video-record@2x.png"
           />
 
-          <div class="live-video">LIVE VIDEO</div>
-        </button>
+          <div class="live-video">VIDEO</div>
+        </button>-->
       </div>
       <div class="content-share">
         <!--<div class="content-share-child"></div>-->
@@ -189,19 +163,13 @@ $isStudent = mysqli_num_rows($result) > 0;
 
           <div class="post-item"></div>
 		  
-	<a href = "<?php echo $file_path; ?>">
-          <img class="post-inner" alt="" src="<?php echo $file_path; ?>" />
+	<a href = "<?php echo $file_path; ?>" target="_blank" >
+          <img class="post-inner" alt="" src="<?php echo $file_path; ?>"  />
 
-          <div class="post-child1"></div>
-          <div class="may">MAY</div>
-          <div class="div">09</div>
+          
           <div class="supervised-learning-algorithms">
           <?php echo $row['description']; ?>           </div>
-          <div class="thu-1000pm">Thu 10:00pm | Zoom Meeting</div>
-          <div class="i-will-be">
-            I will be covering the supervised learning algorithms on Thursday
-            May 10th at 10:00pm
-          </div>
+          
           <div class="john-doe"><?php echo $username; ?></div>
           <div class="post-child2"></div>
           <div class="ellipse-div"></div>
@@ -237,7 +205,7 @@ $isStudent = mysqli_num_rows($result) > 0;
                  <?php     if ($row['type'] == "video") { ?> 
         <div class="photo-post" id="photoPostContainer">
           <div class="photo-post-child"></div>
-		  <a href = "<?php echo $file_path; ?>">
+		  <a target="_blank" href = "<?php echo $file_path; ?>" >
           <img
             class="photo-post-item"
             alt=""
@@ -383,6 +351,8 @@ $isStudent = mysqli_num_rows($result) > 0;
     </div>
 
     <div id="woYMPopup" class="popup-overlay" style="display: none">
+	<form action="assign2.php" method="POST" enctype="multipart/form-data">
+          <input type="hidden" id="username" name="username" value="<?php echo $_SESSION['f_uname'];?>">
       <div class="woym">
         <div class="woym-child"></div>
         <div class="woym-item"></div>
@@ -438,9 +408,9 @@ $isStudent = mysqli_num_rows($result) > 0;
           <div class="post5">POST</div>
         </button>
         <div class="upload-container">
-          <input class="upload2" required="{true}" type="file" name = "image" />
+          <input class="upload2" required="{true}" type="file" name = "image" id="image" />
 
-          <div class="upload-picture">UPLOAD PICTURE</div>
+          <div class="upload-picture">UPLOAD PICTURE/Video</div>
         </div>
         <div class="description5">
           <textarea
@@ -453,11 +423,11 @@ $isStudent = mysqli_num_rows($result) > 0;
           </textarea>
           <div class="username1">DESCRIPTION</div>
         </div>
-        <img
+       <!-- <img
           class="profile-pic-icon"
           alt=""
           src="./public/profile-pic@2x.png"
-        />
+        />-->
       </div>
     </div>
 
@@ -568,26 +538,7 @@ $isStudent = mysqli_num_rows($result) > 0;
         });
       }
       
-      var postContainer = document.getElementById("postContainer");
-      if (postContainer) {
-        postContainer.addEventListener("click", function (e) {
-          window.location.href = "./Frame5.html";
-        });
-      }
       
-      var photoPostContainer = document.getElementById("photoPostContainer");
-      if (photoPostContainer) {
-        photoPostContainer.addEventListener("click", function (e) {
-          window.location.href = "./Frame5.html";
-        });
-      }
-      
-      var friendsBtnContainer = document.getElementById("friendsBtnContainer");
-      if (friendsBtnContainer) {
-        friendsBtnContainer.addEventListener("click", function (e) {
-          window.location.href = "./Frame5.html";
-        });
-      }
       var chatBtnContainer = document.getElementById("chatBtnContainer");
       if (chatBtnContainer) {
         chatBtnContainer.addEventListener("click", function (e) {
@@ -632,7 +583,28 @@ $isStudent = mysqli_num_rows($result) > 0;
       for (let i = 0; i < scrollAnimElements.length; i++) {
         observer.observe(scrollAnimElements[i]);
       }
+Filevalidation = () => {
+			const fi = document.getElementById('image');
+			// Check if any file is selected.
+			if (fi.files.length > 0) {
+				for (const i = 0; i <= fi.files.length - 1; i++) {
 
+					const fsize = fi.files.item(i).size;
+					const file = Math.round((fsize / 1024));
+					// The size of the file.
+					if (file >= 1024) {
+						alert(
+		"File too Big, please select a file less than 4mb");
+					} else if (file < 2048) {
+						alert(
+		"File too small, please select a file greater than 2mb");
+					} else {
+						document.getElementById('size').innerHTML = 
+						'<b>'+ file + '</b> KB';
+					}
+				}
+			}
+		}
       </script>
   </body>
 </html>

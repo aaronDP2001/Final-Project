@@ -8,19 +8,19 @@
     <link rel="stylesheet" href="./Frame10.css" />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"
-    />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=IBM Plex Sans Hebrew:wght@500&display=swap"
-    />
-    <link
-      rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Goldman:wght@400;700&display=swap"
     />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Kadwa:wght@400;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM Plex Sans Hebrew:wght@500&display=swap"
     />
   </head>
   <body>
@@ -28,13 +28,13 @@
       <div class="popup-child"></div>
       <div class="popup-item"></div>
       <img
-        class="logo-icon8"
+        class="logo-icon10"
         alt=""
         src="./public/logo2@2x.png"
         id="popuplogoImage"
       />
 
-      <div class="title2">
+      <div class="title4">
         <input
           class="title-item"
           name="title"
@@ -42,7 +42,7 @@
           type="text"
         />
 
-        <div class="title3">TITLE</div>
+        <div class="title5">TITLE</div>
       </div>
       <div class="domain-group">
         <select class="domain1" autofocus="{true}" form>
@@ -54,12 +54,12 @@
         </select>
         <div class="domain2">DOMAIN</div>
       </div>
-      <button class="submit3" id="submit">
-        <div class="submit-inner"></div>
-        <div class="submit4">SUBMIT</div>
+      <button class="submit5" id="submit">
+        <div class="submit-child2"></div>
+        <div class="submit6">SUBMIT</div>
       </button>
-      <div class="upload-container">
-        <input class="upload2" required="{true}" type="file" />
+      <div class="upload-parent1">
+        <input class="upload3" required="{true}" type="file" />
 
         <div class="upload-file">UPLOAD FILE</div>
       </div>
@@ -70,17 +70,17 @@
           type="text"
         />
 
-        <div class="title3">AUTHOR</div>
+        <div class="title5">AUTHOR</div>
       </div>
-      <div class="description5">
+      <div class="description9">
         <textarea
-          class="rectangle-textarea"
+          class="description-child2"
           placeholder="ENTER DESCRIPTION"
           autofocus="{true}"
           form
         >
         </textarea>
-        <div class="title3">DESCRIPTION</div>
+        <div class="title5">DESCRIPTION</div>
       </div>
     </div>
 
@@ -89,26 +89,6 @@
       if (popuplogoImage) {
         popuplogoImage.addEventListener("click", function (e) {
           window.location.href = "./Main.html";
-        });
-      }
-      
-      var popupsUBMIT = document.getElementById("submit");
-      if (popupsUBMIT) {
-        popupsUBMIT.addEventListener("click", function (e) {
-          var popup = e.currentTarget.parentNode;
-          function isOverlay(node) {
-            return !!(
-              node &&
-              node.classList &&
-              node.classList.contains("popup-overlay")
-            );
-          }
-          while (popup && !isOverlay(popup)) {
-            popup = popup.parentNode;
-          }
-          if (isOverlay(popup)) {
-            popup.style.display = "none";
-          }
         });
       }
       </script>
