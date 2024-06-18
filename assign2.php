@@ -31,6 +31,6 @@ mysqli_query($conn , $sql);
 
 	}
 
-header("Location: index1.php?signup=success");
+header("Location: index2.php?signup=success");
 
 ?> 
