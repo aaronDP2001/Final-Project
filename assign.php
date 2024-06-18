@@ -22,6 +22,9 @@ $username=$_POST['username'];
 $title= $_POST['title'];
 $description= $_POST['description'];
 $subject= $_POST['subject'];
+$mod= $_POST['mod'];
+
+
 
 
 
@@ -30,6 +33,6 @@ mysqli_query($conn , $sql);
 
 
 
-header("Location: NoteSharing.php?signup=success");
+header("Location: NoteSharing2.php?mod=$mod");
 }
 ?> 
