@@ -247,6 +247,7 @@ $isStudent = mysqli_num_rows($result) > 0;
 		</a>
 		</div>
 	<?php }} ?>
+	
       </div>
       <div class="nav-bar">
         <div class="nav-bar-child"></div>
@@ -378,6 +379,7 @@ $isStudent = mysqli_num_rows($result) > 0;
           >
           </textarea>
           <div class="username2">DESCRIPTION</div>
+		  </form>
         </div>
         <img
           class="profile-pic-icon1"
