@@ -25,6 +25,7 @@ $isStudent = mysqli_num_rows($res) > 0;
 <!DOCTYPE html>
 <html>
 <head>
+<script src="ckeditor/ckeditor.js"></script>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
     <title>Room</title>
@@ -34,6 +35,7 @@ $isStudent = mysqli_num_rows($res) > 0;
     <link rel='stylesheet' type='text/css' media='screen' href='styles/room.css'>
 </head>
 <body>
+
 
     <header id="nav">
        <div class="nav--list">
@@ -56,7 +58,9 @@ $isStudent = mysqli_num_rows($res) > 0;
             </a> -->
 
         </div>
+        <div>
         <button id="toggle-dash"<?php if (!$isModerator) echo 'style="display: none;"'; ?>>Admin Dashboard</button>
+</div>
             <div id="admin-dashboard-popup" class="admin-dashboard-popup">
                 <div class="admin-dashboard-content">
                     <h2>Admin Dashboard</h2>
@@ -98,15 +102,19 @@ $isStudent = mysqli_num_rows($res) > 0;
                 </div>
                 <span class="admin-dashboard-close">&times;</span>
             </div>
+            <div class="participants-toggle">
+                <input type="checkbox" id="toggle-members" class="toggle-input">
+                <label for="toggle-members" class="toggle-label">Collapse Participants</label>
+            </div>
+            <div class="toggle-messages-btn">
+            <button id="toggle-messages-btn">Toggle Messages</button>
+        </div>
     </header>
 
     <main class="container">
         <div id="room__container">
 
-            <div class="participants-toggle">
-                <input type="checkbox" id="toggle-members" class="toggle-input">
-                <label for="toggle-members" class="toggle-label">Collapse Participants</label>
-            </div>
+
             <section id="members__container">
                 <div id="members__header">
                     <p>Participants</p>
@@ -121,10 +129,18 @@ $isStudent = mysqli_num_rows($res) > 0;
 
             <section id="stream__container">
 
-                <div id="stream__box"></div>
+                <div id="stream__box">
+   
+                </div>
 
                 <div id="streams__container"></div>
+                <form id="editor">
 
+	<textarea name="content" rows="5" cols="8"></textarea>
+ <script>
+ CKEDITOR.replace('content');
+</script>
+</form>
                 <div class="stream__actions">
                     <button id="camera-btn" class="active">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M5 4h-3v-1h3v1zm10.93 0l.812 1.219c.743 1.115 1.987 1.781 3.328 1.781h1.93v13h-20v-13h3.93c1.341 0 2.585-.666 3.328-1.781l.812-1.219h5.86zm1.07-2h-8l-1.406 2.109c-.371.557-.995.891-1.664.891h-5.93v17h24v-17h-3.93c-.669 0-1.293-.334-1.664-.891l-1.406-2.109zm-11 8c0-.552-.447-1-1-1s-1 .448-1 1 .447 1 1 1 1-.448 1-1zm7 0c1.654 0 3 1.346 3 3s-1.346 3-3 3-3-1.346-3-3 1.346-3 3-3zm0-2c-2.761 0-5 2.239-5 5s2.239 5 5 5 5-2.239 5-5-2.239-5-5-5z"/></svg>
@@ -143,10 +159,9 @@ $isStudent = mysqli_num_rows($res) > 0;
                     </button>
                 </div>
 
+
                 <button id="join-btn">Join Stream</button>
             </section>
-
-            <button id="toggle-messages-btn">Toggle Messages</button>
 
             <section id="messages__container">
                 <div id="messages"></div>

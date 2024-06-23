@@ -3,7 +3,7 @@ ob_start ();
 session_start();
 require "php/config.php";
 require_once "php/functions.php";
-
+$mod=$_GET['mod'];
 
 ?>
 <!DOCTYPE html>
@@ -82,9 +82,8 @@ require_once "php/functions.php";
       <div class="friend-list">
         <div class="friend-list-child"></div>
         <div class="friend-list-item"></div>
-        <div class="friend-list-inner"></div>
-        <div class="friend-list-child1"></div>
-        <div class="friend-list-child2"></div>
+        
+        
         <img
           class="logo-icon4"
           alt=""
@@ -97,7 +96,7 @@ require_once "php/functions.php";
 
         <div class="search4">Search</div>
         <div class="currently-live3">CURRENTLY LIVE</div>
-        <img
+        <!--<img
           class="friend-list-child4"
           alt=""
           src="./public/ellipse-1@2x.png"
@@ -155,7 +154,7 @@ require_once "php/functions.php";
           class="friend-list-child13"
           alt=""
           src="./public/ellipse-2@2x.png"
-        />
+        />-->
 
         <div class="channel-1-live-container3">
           <span class="channel-13">Channel 1 </span>
@@ -165,7 +164,7 @@ require_once "php/functions.php";
           <span class="channel-13">Channel 2 </span>
           <span class="live8">LIVE</span>
         </div>
-        <div class="subscriptions3">SUBSCRIPTIONS</div>
+       <!-- <div class="subscriptions3">SUBSCRIPTIONS</div>
         <div class="friends3">FRIENDS</div>
         <div class="john-doe6">John Doe</div>
         <div class="darrell-steward6">Darrell Steward</div>
@@ -175,7 +174,7 @@ require_once "php/functions.php";
         <div class="kathryn-murphy3">Kathryn Murphy</div>
         <div class="theresa-webb3">Theresa Webb</div>
         <div class="darrell-steward7">Darrell Steward</div>
-      </div>
+      </div>-->
 	  
       		  
 <div class="notes-sharing2">NOTES SHARING</div>
@@ -221,13 +220,13 @@ require_once "php/functions.php";
             class="post-child22"
             alt=""
             src="./public/rectangle-115@2x.png"
-          />-->
+          />
 
           <div class="date">
             <div class="date-child"></div>
             <div class="may5">MAY</div>
             <div class="div21">09</div>
-          </div>
+          </div>-->
           <div class="supervised-learning-algorithms4">
            <?php echo $row['user_title']; ?>          
           </div>
@@ -242,7 +241,7 @@ require_once "php/functions.php";
         </div>
 	  				 
 
-      <button class="add-btn1" id="add">
+      <button class="add-btn1" id="add" <?php if ($mod==1) echo 'style="display: none;"'; ?>>
         <div class="bg"></div>
         <img class="plus-icon1" alt="" src="./public/plus@2x.png" />
       </button>
@@ -252,12 +251,12 @@ require_once "php/functions.php";
       <div class="rectangle-root">
         <div class="frame-child45"></div>
         <div class="frame-child46"></div>
-        <img
+        <!--<img
           class="logo-icon5"
           alt=""
           src="./public/logo2@2x.png"
           id="popuplogoImage"
-        />
+        />-->
 		<form action="assign.php" method="POST" enctype="multipart/form-data">
           <input type="hidden" id="username" name="username" value="<?php echo $_SESSION['f_uname'];?>">
         <div class="title">
@@ -343,7 +342,7 @@ require_once "php/functions.php";
       var homeBtn = document.getElementById("Home");
       if (homeBtn) {
         homeBtn.addEventListener("click", function (e) {
-          window.location.href = "./index1.php";
+          window.location.href = "./index2.php";
         });
       }
       

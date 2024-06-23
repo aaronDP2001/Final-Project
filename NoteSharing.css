@@ -569,12 +569,14 @@
   margin-top: 10px;
 }
 .post-share-section {
+	background-color: #f5f6ff;
   position: absolute;
   top: 204px;
-  left: 346px;
+  left: 323px;
   width: 984px;
   height: 593px;
   font-size: var(--font-size-3xs);
+  overflow:auto;
 }
 .bg {
   position: absolute;
