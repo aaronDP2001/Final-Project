@@ -287,10 +287,10 @@
 .notes-sharing2 {
   position: absolute;
   top: 112px;
-  left: 474px;
-  font-size: var(--font-size-17xl);
+  left: 667px;
+  font-size: 30px;
   display: inline-block;
-  color: var(--color-white);
+  color: white;
   width: 438px;
   height: 43px;
 }
@@ -463,8 +463,8 @@
   top: 0;
   left: 0;
   border-radius: 0 0 var(--br-mini) var(--br-mini);
-  background-color: var(--color-aliceblue);
-  width: 421px;
+  background-color: #e9f6ff;
+width: 365px;
   height: 62px;
 }
 .home-btn-inner {
@@ -540,7 +540,7 @@
 .notes-btn2 {
   position: absolute;
   top: 14px;
-  left: 350px;
+left: 292px;
   width: 43px;
   height: 35px;
 }

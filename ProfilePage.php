@@ -1,3 +1,44 @@
+<?php
+ob_start();
+session_start();
+require "php/config.php";
+require_once "php/functions.php";
+$user_name=$_GET['user_name'];
+//$home=$_GET['home'];
+
+if (!isset($_SESSION['f_uname'])) {
+
+    header("Location: index.php");
+    exit;
+}
+
+$db = mysqli_connect("localhost", "root", "", "learnsync");
+$username = $_SESSION['f_uname'];
+$_SESSION['comment_name'] = $username;
+$query = "SELECT * FROM mod_reg WHERE username = '$username' AND privilege='moderator'";
+$result = mysqli_query($db, $query);
+$isModerator = mysqli_num_rows($result) > 0;
+
+$query = "SELECT * FROM registration WHERE username = '$username'AND privilege='student'";
+$result = mysqli_query($db, $query);
+$rowss_1 = mysqli_fetch_array($result); 
+$isStudent = mysqli_num_rows($result) > 0;
+if ($isModerator)
+{
+	$mod_is=1;
+}
+else
+{
+	$mod_is=0;
+	$profile_pic = $rowss_1['profile_photo'];
+	$full_name=$rowss_1['name'];
+
+}
+
+                       
+
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -34,7 +75,7 @@
       <img
         class="profile-pic-icon5"
         alt=""
-        src="./public/profile-pic1@2x.png"
+        src="profile_pics/<?php echo $profile_pic ?>"
       />
 
       <div class="rectangle-parent6">
@@ -43,7 +84,6 @@
           class="logo-icon11"
           alt=""
           src="./public/logo3@2x.png"
-          id="logoImage2"
         />
 
         <div class="frame-child41"></div>
@@ -58,24 +98,24 @@
         <div class="channel-16">Channel 1</div>
         <div class="channel-26">Channel 2</div>
       </div>
-      <div class="adam-walker2">ADAM WALKER</div>
+      <div class="adam-walker2"><?php echo $full_name?></div>
       <button class="edit-profile4" id="editProfile">
         <div class="edit-profile-inner"></div>
         <div class="edit-profile5">Edit profile</div>
       </button>
-      <div class="bio2">BIO</div>
-      <div class="posts6">
+      <!--<div class="bio2">BIO</div>-->
+      <!--<div class="posts6">
         <b class="b2">100</b>
         <div class="posts7">Posts</div>
       </div>
       <div class="subs2">
-        <b class="k4">23K</b>
+        <b class="k4">0</b>
         <div class="subscribers2">Subscribers</div>
       </div>
       <div class="followers2">
-        <b class="k4">1K</b>
+        <b class="k4">0</b>
         <div class="subscribers2">Following</div>
-      </div>
+      </div>-->
       <div class="profile-page-child5"></div>
       <div class="posts8">POSTS</div>
       <div class="nav-bar4">
@@ -84,19 +124,13 @@
           <div class="home-btn-child3"></div>
           <img class="exterior-icon5" alt="" src="./public/exterior1@2x.png" />
         </button>
-        <div class="friends-btn5" id="friendsBtnContainer2">
-          <div class="friends-btn-child3"></div>
-          <img class="people-icon6" alt="" src="./public/people2@2x.png" />
-        </div>
+        
         <div class="notes-btn5" id="notesBtnContainer2">
           <div class="notes-btn-child3"></div>
           <img class="notes-icon5" alt="" src="./public/notes1@2x.png" />
         </div>
-        <div class="category-btn5">
-          <div class="friends-btn-child3"></div>
-          <img class="category-icon5" alt="" src="./public/category1@2x.png" />
-        </div>
-        <div class="chat-btn5">
+        
+        <div class="chat-btn5" id="stream">
           <div class="chat-btn-child3"></div>
           <img
             class="chat-bubble-icon5"
@@ -104,41 +138,54 @@
             src="./public/chat-bubble1@2x.png"
           />
         </div>
-        <div class="clock-btn5">
-          <div class="friends-btn-child3"></div>
-          <img class="clock-icon5" alt="" src="./public/clock1@2x.png" />
-        </div>
+        
       </div>
       <div class="content-share3">
-        <div class="content-share-child1"></div>
+	  
+	  <?php
+  $db = mysqli_connect("localhost", "root", "", "learnsync");
+   
+  $result = mysqli_query($db, "SELECT * FROM content_sharing");
+   $count=0;
+     
+							
+    while ($row = mysqli_fetch_array($result)) { 
+	$varic=$row['id'];
+	$results=mysqli_query($db, "SELECT * FROM content_sharing where id= $varic ");
+							$rows = mysqli_fetch_array($results); 
+							$likes=$rows['likes'];
+	                        $dislikes=$rows['dislikes'];
+	                        $file_path = "files/" . $rows['address'];
+		
+		$resultss=mysqli_query($db, "SELECT * FROM content_sharing INNER JOIN registration ON content_sharing.username = registration.username where id= $varic");		
+                       							$rowss = mysqli_fetch_array($resultss); 
+		               $username = $rowss['name'];
+					   $u_username = $rowss['username'];
+					   $content_profile_pic=$rowss['profile_photo'];
+	if ($row['type'] == "photo" AND $row['username']==$user_name) {
+                 
+                         
+	?>
+	<a href = "<?php echo $file_path; ?>" target="_blank" >
         <div class="post10">
           <img class="post-child23" alt="" src="./public/ellipse-222@2x.png" />
 
           <div class="post-child24"></div>
-          <div class="post-child25"></div>
-          <div class="may13">MAY</div>
-          <div class="div79">09</div>
+          
           <div class="hyperlink1" id="hyperlinkContainer">
             <img
               class="hyperlink-item"
               alt=""
-              src="./public/rectangle-11@2x.png"
+              src="<?php echo $file_path; ?>"
             />
 
             <div class="supervised-learning-algorithms11">
-              Supervised Learning Algorithms
-            </div>
-            <div class="thu-1000pm3">Thu 10:00pm | Zoom Meeting</div>
-            <div class="i-will-be11">
-              I will be covering the supervised learning algorithms on Thursday
-              May 10th at 10:00pm
-            </div>
+<?php echo $row['description']; ?>             </div>
+            
           </div>
-          <div class="john-doe27">John Doe</div>
-          <div class="post-child26"></div>
-          <div class="post-child27"></div>
-          <div class="participants5">Participants</div>
-          <div class="div80">72</div>
+          <div class="john-doe27"><?php echo $username; ?></div>
+          
+          
           <div class="share16">
             <img class="share-icon19" alt="" src="./public/share2@2x.png" />
 
@@ -147,42 +194,44 @@
           <div class="like15">
             <img class="fire-icon18" alt="" src="./public/fire2@2x.png" />
 
-            <div class="div82">12</div>
+            <div class="div82"><?php echo $likes; ?></div>
           </div>
           <div class="dislike15">
             <img
               class="icon-favorite-dislike-1-rewar9"
               alt=""
-              src="./public/-icon-favorite-dislike-1-reward-down-thumb-hand-social-media-dislike-rating4.svg"
+              src="./public/-icon-favorite-dislike-1-reward-down-thumb-hand-social-media-dislike-rating1.svg"
             />
 
-            <div class="div83">5</div>
+            <div class="div83"><?php echo $dislikes; ?></div>
           </div>
-          <img class="post-child28" alt="" src="./public/ellipse-222@2x.png" />
-
-          <button class="comment-btn9" id="commentBtn">
+          <img class="post-child28" alt="" src="profile_pics/<?php echo $content_profile_pic; ?>" />
+</a>
+<a href = "assign8.php?user_name=<?php echo $u_username; ?>&id=<?php echo $varic; ?>"  >
+          <button class="comment-btn9" >
             <div class="comment-btn-child7"></div>
             <div class="delete6">DELETE</div>
           </button>
+		  </a>
         </div>
+		<?php } ?>
+<?php     if ($row['type'] == "video" AND $row['username']==$user_name) {  ?> 
         <div class="photo-post3">
           <div class="photo-post-child4"></div>
+		  <a target="_blank" href = "<?php echo $file_path; ?>" >
           <div class="hyperlink23" id="hyperlink2Container">
             <img
               class="hyperlink2-child4"
               alt=""
-              src="./public/rectangle-11@2x.png"
+              src="./public/play.jpeg"
             />
 
-            <div class="hyperlink2-child5"></div>
-            <div class="may14">MAY</div>
-            <div class="div84">09</div>
+            
             <div class="i-will-be12">
-              I will be covering the supervised learning algorithms on Thursday
-              May 10th at 10:00pm
+<?php echo $row['description']; ?>
             </div>
           </div>
-          <div class="john-doe28">John Doe</div>
+          <div class="john-doe28"><?php echo $username; ?></div>
           <div class="share17">
             <img class="share-icon19" alt="" src="./public/share2@2x.png" />
 
@@ -191,29 +240,33 @@
           <div class="like16">
             <img class="fire-icon18" alt="" src="./public/fire2@2x.png" />
 
-            <div class="div82">12</div>
+            <div class="div82"><?php echo $likes; ?></div>
           </div>
           <div class="dislike16">
             <img
               class="icon-favorite-dislike-1-rewar10"
               alt=""
-              src="./public/-icon-favorite-dislike-1-reward-down-thumb-hand-social-media-dislike-rating5.svg"
+              src="./public/-icon-favorite-dislike-1-reward-down-thumb-hand-social-media-dislike-rating1.svg"
             />
 
-            <div class="div87">5</div>
+            <div class="div87"><?php echo $dislikes; ?></div>
           </div>
           <img
             class="photo-post-child5"
             alt=""
-            src="./public/ellipse-222@2x.png"
+            src="profile_pics/<?php echo $content_profile_pic; ?>"
           />
-
-          <button class="comment-btn10" autofocus="{true}" id="commentBtn1">
+</a>
+<a href = "assign8.php?user_name=<?php echo $u_username; ?>&id=<?php echo $varic; ?>"  >
+          <button class="comment-btn10" autofocus="{true}" >
             <div class="comment-btn-child7"></div>
             <div class="delete6">DELETE</div>
           </button>
+		  </a>
         </div>
-        <div class="wym-post3">
+	<?php } ?>
+		<?php     if ($row['type'] == "text" AND $row['username']==$user_name) {  ?> 
+       <div class="wym-post3">
           <div class="photo-post-child4"></div>
           <div class="share17">
             <img class="share-icon19" alt="" src="./public/share2@2x.png" />
@@ -223,43 +276,46 @@
           <div class="like16">
             <img class="fire-icon18" alt="" src="./public/fire2@2x.png" />
 
-            <div class="div82">12</div>
+            <div class="div82"><?php echo $likes; ?></div>
           </div>
           <div class="dislike16">
             <img
               class="icon-favorite-dislike-1-rewar10"
               alt=""
-              src="./public/-icon-favorite-dislike-1-reward-down-thumb-hand-social-media-dislike-rating5.svg"
+              src="./public/-icon-favorite-dislike-1-reward-down-thumb-hand-social-media-dislike-rating1.svg"
             />
 
-            <div class="div87">5</div>
+            <div class="div87"><?php echo $dislikes; ?></div>
           </div>
           <div class="hyperlink33" id="hyperlink3Container">
-            <div class="date4">
-              <div class="date-child2"></div>
-              <div class="may15">MAY</div>
-              <div class="div91">09</div>
-            </div>
+            
             <div class="i-will-be13">
-              I will be covering the supervised learning algorithms on Thursday
-              May 10th at 10:00pm
+             <?php echo $row['description']; ?>
             </div>
-            <div class="john-doe29">John Doe</div>
+            <div class="john-doe29"><?php echo $username; ?></div>
             <img
               class="hyperlink3-child1"
               alt=""
-              src="./public/ellipse-224@2x.png"
+              src="profile_pics/<?php echo $content_profile_pic; ?>"
             />
           </div>
-          <button class="comment-btn11" id="commentBtn2">
+		  </a>
+<a href = "assign8.php?user_name=<?php echo $u_username; ?>&id=<?php echo $varic; ?>"  >
+          <button class="comment-btn11" >
             <div class="comment-btn-child7"></div>
             <div class="delete6">DELETE</div>
           </button>
+		  </a>
         </div>
+	<?php } }?>
       </div>
     </div>
+<form action="assign7.php" method="POST" enctype="multipart/form-data">
 
     <div id="profilePopup" class="popup-overlay" style="display: none">
+	
+	<input type="hidden" id="user_name" name="user_name" value="<?php echo $user_name;?>">
+	
       <div class="profile-popup">
         <div class="profile-popup-child"></div>
         <div class="profile-popup-item"></div>
@@ -267,10 +323,9 @@
           class="logo-icon12"
           alt=""
           src="./public/logo4@2x.png"
-          id="popuplogoImage"
         />
 
-        <div class="title5">
+      <!--  <div class="title5">
           <input
             class="title-item"
             name="title"
@@ -279,8 +334,8 @@
           />
 
           <div class="name">USERNAME</div>
-        </div>
-        <div class="domain-group">
+        </div> -->
+       <!-- <div class="domain-group">
           <select class="domain2" autofocus="{true}" form>
             <option value="rather not say">rather not say</option>
             <option value="male">male</option>
@@ -288,30 +343,35 @@
             <option value="other">other</option>
           </select>
           <div class="gender">GENDER</div>
+        </div>-->
+		<div class="upload-parent1">
+          <div class="upload3" required="{true}">
+            <label class="label3" for="file-410:180">
+              <div class="upload-child1">Click Here</div>
+            </label>
+            <input class="input3" type="file" name="myfile" id="file-410:180" />
+          </div>
+          <div class="profile-picture">PROFILE PICTURE</div>
         </div>
+		
         <button class="submit5" id="submit">
           <div class="submit-child2"></div>
           <div class="submit6">SUBMIT</div>
         </button>
-        <div class="upload-parent1">
-          <div class="upload3" required="{true}">
-            <label class="label3" for="file-410:180">
-              <div class="upload-child1"></div>
-            </label>
-            <input class="input3" type="file" id="file-410:180" />
-          </div>
-          <div class="profile-picture">PROFILE PICTURE</div>
-        </div>
+        
         <div class="author2">
           <input
+		    name="p_name"
             class="author-item"
-            placeholder="ENTER AUTHOR NAME"
+            placeholder="<?php echo $full_name?>"
+			value="<?php echo $full_name?>"
             type="text"
           />
 
           <div class="name">NAME</div>
         </div>
-        <div class="description10">
+		</form>
+        <!--<div class="description10">
           <textarea
             class="description-child2"
             placeholder="ENTER DESCRIPTION"
@@ -320,11 +380,25 @@
           >
           </textarea>
           <div class="name">BIO</div>
-        </div>
+        </div>-->
       </div>
+	  
     </div>
-
+</form>
     <script>
+	
+	var homeBtn = document.getElementById("Home");
+      if (homeBtn) {
+        homeBtn.addEventListener("click", function (e) {
+          window.location.href = "./index2.php";
+        });
+      }
+	  var stream=  document.getElementById("stream");
+      if (stream) {
+        stream.addEventListener("click", function (e) {
+          window.location.href = "./lobby.php";
+        });
+      }
       var popuplogoImage = document.getElementById("popuplogoImage");
       if (popuplogoImage) {
         popuplogoImage.addEventListener("click", function (e) {
@@ -395,16 +469,12 @@
       var notesBtnContainer2 = document.getElementById("notesBtnContainer2");
       if (notesBtnContainer2) {
         notesBtnContainer2.addEventListener("click", function (e) {
-          window.location.href = "./NoteSharing.html";
+          window.location.href = "./NoteSharing2.php?mod=0";
         });
       }
       
-      var hyperlinkContainer = document.getElementById("hyperlinkContainer");
-      if (hyperlinkContainer) {
-        hyperlinkContainer.addEventListener("click", function (e) {
-          window.location.href = "./Frame5.html";
-        });
-      }
+     
+	 
       
       var commentBtn = document.getElementById("commentBtn");
       if (commentBtn) {

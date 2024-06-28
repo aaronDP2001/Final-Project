@@ -359,7 +359,7 @@
   font-size: var(--font-size-mid);
   font-family: var(--font-goldman);
   color: var(--color-white);
-  text-align: left;
+  text-align: center;
   display: inline-block;
   width: 105px;
   height: 30px;
@@ -455,9 +455,8 @@
   object-fit: cover;
 }
 .supervised-learning-algorithms {
-	left: 306px;
   position: absolute;
-  left: 355px;
+  left: 311px;
   display: flex;
   align-items: center;
 }
@@ -586,7 +585,7 @@
 }
 .like {
   top: 212px;
-  left: 457px;
+  left: 479px;
   width: 43px;
   height: 25px;
 }
@@ -619,7 +618,7 @@
   top: 78.78%;
   right: 9.62%;
   bottom: 14.75%;
-  left: 83.52%;
+  left: 547px;
 }
 .ellipse-icon {
   position: absolute;
@@ -723,7 +722,7 @@
 }
 .div5 {
   top: 22px;
-  left: 308px;
+  left: 340px;
   font-size: var(--font-size-7xl);
   font-family: var(--font-goldman);
   width: 43px;
@@ -759,13 +758,13 @@
 .share1 {
   position: absolute;
   top: 148px;
-  left: 564px;
+  left: 479px;
   width: 49px;
   height: 22px;
 }
 .like1 {
   top: 144px;
-  left: 456px;
+  left: 492px;
   width: 43px;
   height: 25px;
 }
@@ -798,7 +797,7 @@
   top: 81.87%;
   right: 8.65%;
   bottom: 5.44%;
-  left: 83.52%;
+  left: 554px;
 }
 .photo-post-item {
   position: absolute;
@@ -973,7 +972,7 @@
   left: 0;
   border-radius: 0 0 var(--br-mini) var(--br-mini);
   background-color: var(--color-aliceblue);
-  width: 421px;
+width: 362px;
   height: 62px;
 }
 .home-btn-child {
@@ -1050,7 +1049,7 @@
 }
 .notes-btn {
   top: 14px;
-  left: 350px;
+left: 286px;
   height: 35px;
   cursor: pointer;
 }

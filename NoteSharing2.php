@@ -162,10 +162,11 @@ $mod=$_GET['mod'];
 		$resultss=mysqli_query($db, "SELECT * FROM notes_table INNER JOIN registration ON notes_table.username = registration.username where id= $varic");		
                        							$rowss = mysqli_fetch_array($resultss); 
 		               $username = $rowss['name'];
+					   $content_profile_pic=$rowss['profile_photo'];
 	?>
         <div class="post6">
 		<a href = "<?php echo $file_path; ?>" target="_blank">
-          <img class="post-child21" alt="" src="./public/ellipse-20@2x.png" />
+          <img class="post-child21" alt="" src="profile_pics/<?php echo $content_profile_pic; ?>" />
 
           <div class="post-background"></div>
 		  <?php if ($row['subject']=="Compiler Design") {
@@ -207,19 +208,13 @@ $mod=$_GET['mod'];
           <div class="home-btn-inner"></div>
           <img class="exterior-icon2" alt="" src="./public/exterior@2x.png" />
         </button>
-        <div class="friends-btn2" id="friendsBtnContainer">
-          <div class="friends-btn-inner"></div>
-          <img class="people-icon2" alt="" src="./public/people@2x.png" />
-        </div>
+       
         <div class="notes-btn2">
           <div class="notes-btn-inner"></div>
           <img class="notes-icon2" alt="" src="./public/notes@2x.png" />
         </div>
-        <div class="category-btn2">
-          <div class="friends-btn-inner"></div>
-          <img class="category-icon2" alt="" src="./public/category@2x.png" />
-        </div>
-        <div class="chat-btn2">
+        
+        <div class="chat-btn2" id="stream">
           <div class="chat-btn-inner"></div>
           <img
             class="chat-bubble-icon2"
@@ -227,10 +222,7 @@ $mod=$_GET['mod'];
             src="./public/chat-bubble@2x.png"
           />
         </div>
-        <div class="clock-btn2">
-          <div class="friends-btn-inner"></div>
-          <img class="clock-icon2" alt="" src="./public/clock@2x.png" />
-        </div>
+        
       </div>
     </div>
 
@@ -332,7 +324,7 @@ $mod=$_GET['mod'];
       var logoImage = document.getElementById("logoImage");
       if (logoImage) {
         logoImage.addEventListener("click", function (e) {
-          window.location.href = "./Main.html";
+          window.location.href = "./index2.php";
         });
       }
       
@@ -366,6 +358,13 @@ $mod=$_GET['mod'];
       if (homeBtn) {
         homeBtn.addEventListener("click", function (e) {
           window.location.href = "./index2.php";
+        });
+      }
+	  
+	  var stream=  document.getElementById("stream");
+      if (stream) {
+        stream.addEventListener("click", function (e) {
+          window.location.href = "./lobby.php";
         });
       }
       

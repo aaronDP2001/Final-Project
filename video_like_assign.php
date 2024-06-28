@@ -16,6 +16,6 @@ mysqli_query($conn , $sql);
 
 
 
-header("Location: CommentPg11.php?id=$content_id");
+header("Location: CommentPg11.php?id=$content_id&mod_is=0");
 
 ?> 
