@@ -3,7 +3,9 @@ ob_start();
 session_start();
 require "php/config.php";
 require_once "php/functions.php";
-
+$_SESSION['comment_user_name'] = $_SESSION['f_uname'];
+$_SESSION['profile_name'] = $_SESSION['f_uname'];
+//$home=$_GET['home'];
 
 if (!isset($_SESSION['f_uname'])) {
 
@@ -20,6 +22,7 @@ $isModerator = mysqli_num_rows($result) > 0;
 
 $query = "SELECT * FROM registration WHERE username = '$username'AND privilege='student'";
 $result = mysqli_query($db, $query);
+$rowss_1 = mysqli_fetch_array($result); 
 $isStudent = mysqli_num_rows($result) > 0;
 if ($isModerator)
 {
@@ -28,14 +31,20 @@ if ($isModerator)
 else
 {
 	$mod_is=0;
+	$profile_pic = $rowss_1['profile_photo'];
+
 }
+
+                       
 
 ?>
 <!DOCTYPE html>
 <html>
+<?php //if ($home==1) { ?>
 <script type="text/javascript">
       window.history.forward();
     </script>
+<?php //}?>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -67,11 +76,11 @@ else
     <div class="main">
       <div class="main-child"></div>
       <div class="main-item"></div>
-      <img class="doorbell-icon" alt="" src="./public/doorbell@2x.png" />
+    <!--  <img class="doorbell-icon" alt="" src="./public/doorbell@2x.png" />-->
 
       <div class="adam-parent">
         <div class="adam"><?php echo $_SESSION['f_uname'];?></div>
-        <div class="live">
+       <!-- <div class="live">
           <img
             class="live-child"
             alt=""
@@ -98,8 +107,8 @@ else
           />
 
           <img class="sent-icon" alt="" src="./public/sent@2x.png" />
-        </div>
-        <div class="person">
+        </div>-->
+        <!--<div class="person">
           <div class="person-child"></div>
           <div class="sarah-houston">Sarah Houston</div>
           <div class="such-great-information">Such great information.</div>
@@ -113,10 +122,10 @@ else
           <div class="person-child"></div>
           <div class="sarah-houston">Arman Bahir</div>
           <div class="such-great-information">Wow keep it up</div>
-        </div>
+        </div>-->
         <div class="wym" <?php if ($isModerator) echo 'style="display: none;"'; ?>>
           <div class="wym-child"></div>
-          <img class="wym-item" alt="" src="./public/ellipse-23@2x.png" />
+          <img class="wym-item" alt="" src="profile_pics/<?php echo $profile_pic; ?>" />
 
           <button class="hyf-input" id="hYFInput"></button>
           <!--<button class="activity-button" autofocus="{true}">
@@ -144,7 +153,7 @@ else
               src="./public/video-record@2x.png"
             />
 
-            <div class="live-video">LIVE VIDEO</div>
+            <div class="live-video">VIDEO</div>
           </button>
         </div>
       </div>
@@ -190,6 +199,7 @@ else
 		$resultss=mysqli_query($db, "SELECT * FROM content_sharing INNER JOIN registration ON content_sharing.username = registration.username where id= $varic");		
                        							$rowss = mysqli_fetch_array($resultss); 
 		               $username = $rowss['name'];
+					   $content_profile_pic=$rowss['profile_photo'];
 					   if ($row['type'] == "photo") {
                         
                          
@@ -221,11 +231,7 @@ else
           <div class="ellipse-div"></div>
           <div class="participants">Participants</div>
           <div class="div1">72</div>-->
-          <div class="share">
-            <img class="share-icon" alt="" src="./public/share@2x.png" />
-
-            <div class="div2">30</div>
-          </div>
+          
           <div class="like">
             <img class="fire-icon" alt="" src="./public/fire@2x.png" />
 
@@ -240,9 +246,9 @@ else
 
             <div class="div4"><?php echo $dislikes; ?></div>
           </div>
-          <img class="ellipse-icon" alt="" src="./public/ellipse-20@2x.png" />
+          <img class="ellipse-icon" alt="" src="profile_pics/<?php echo $content_profile_pic; ?>" />
 		  </a>
-		  <a href = "CommentPg1.php?id=<?php echo $varic; ?>"  >
+		  <a href = "CommentPg1.php?id=<?php echo $varic; ?>&mod_is=<?php echo $mod_is; ?>"  >
           <button class="comment-btn" >
             <div class="comment-btn-child"></div>
             <div class="comments">COMMENTS</div>
@@ -270,11 +276,7 @@ else
             </div>
           <!--</div>-->
           <div class="john-doe1"><?php echo $username; ?></div>
-          <div class="share1">
-            <img class="share-icon" alt="" src="./public/share@2x.png" />
-
-            <div class="div2">30</div>
-          </div>
+          
           <div class="like1">
             <img class="fire-icon" alt="" src="./public/fire@2x.png" />
 
@@ -292,10 +294,10 @@ else
           <img
             class="photo-post-item"
             alt=""
-            src="./public/ellipse-20@2x.png"
+            src="profile_pics/<?php echo $content_profile_pic; ?>"
           />
                </a>
-           <a href = "CommentPg11.php?id=<?php echo $varic; ?>"  >
+           <a href = "CommentPg11.php?id=<?php echo $varic; ?>&mod_is=<?php echo $mod_is; ?>"  >
           <button class="comment-btn1" autofocus="{true}" >
             <div class="comment-btn-child"></div>
             <div class="comments">COMMENTS</div>
@@ -307,11 +309,7 @@ else
 
         <div class="wym-post">
           <div class="photo-post-child"></div>
-          <div class="share1">
-            <img class="share-icon" alt="" src="./public/share@2x.png" />
-
-            <div class="div2">30</div>
-          </div>
+          
           <div class="like1">
             <img class="fire-icon" alt="" src="./public/fire@2x.png" />
 
@@ -339,11 +337,11 @@ else
             <img
               class="hyperlink3-child"
               alt=""
-              src="./public/ellipse-22@2x.png"
+              src="profile_pics/<?php echo $content_profile_pic; ?>"
             />
            <!--</div>-->
 		  </a>
-	       <a href = "CommentPg3.php?id=<?php echo $varic; ?>"  >
+	       <a href = "CommentPg3.php?id=<?php echo $varic; ?>&mod_is=<?php echo $mod_is; ?>"  >
           <button class="comment-btn2" >
             <div class="comment-btn-child"></div>
             <div class="comments">COMMENTS</div>
@@ -358,18 +356,12 @@ else
           <div class="home-btn-child"></div>
           <img class="exterior-icon" alt="" src="./public/exterior@2x.png" />
         </button>
-        <div class="friends-btn" id="friendsBtnContainer">
-          <div class="friends-btn-child"></div>
-          <img class="people-icon" alt="" src="./public/people@2x.png" />
-        </div>
+        
         <div class="notes-btn" id="notesBtnContainer">
           <div class="notes-btn-child"></div>
           <img class="notes-icon" alt="" src="./public/notes@2x.png" />
         </div>
-        <div class="category-btn">
-          <div class="friends-btn-child"></div>
-          <img class="category-icon" alt="" src="./public/category@2x.png" />
-        </div>
+        
         <div class="chat-btn" id="chatBtnContainer">
           <div class="chat-btn-child"></div>
           <img
@@ -378,19 +370,16 @@ else
             src="./public/chat-bubble@2x.png"
           />
         </div>
-        <div class="clock-btn">
-          <div class="friends-btn-child"></div>
-          <img class="clock-icon" alt="" src="./public/clock@2x.png" />
-        </div>
+        
 		<div class="admin-dash-btn" id="admindashBtnContainer" <?php if (!$isModerator) echo 'style="display: none;"'; ?>>
           <div class="admins-dash-btn-child"></div>
           <img class="clock-icon" alt="" src="./public/admin.png" />
         </div>
       </div>
       <img
-        class="main-inner"
+        class="main-inner" <?php if ($isModerator) echo 'style="display: none;"'; ?>
         alt=""
-        src="./public/ellipse-221@2x.png"
+        src="profile_pics/<?php echo $profile_pic; ?>"
         id="ellipseIcon"
       />
 
@@ -435,7 +424,7 @@ else
         <img
           class="profile-pic-icon1"
           alt=""
-          src="./public/profile-pic@2x.png"
+          src="profile_pics/<?php echo $profile_pic; ?>"
         />
 		</form>
       </div>
@@ -484,7 +473,7 @@ else
         <img
           class="profile-pic-icon3"
           alt=""
-          src="./public/profile-pic@2x.png"
+          src="profile_pics/<?php echo $profile_pic; ?>"
         />
       </div>
     </div>
@@ -1036,7 +1025,7 @@ else
       var ellipseIcon = document.getElementById("ellipseIcon");
       if (ellipseIcon) {
         ellipseIcon.addEventListener("click", function (e) {
-          window.location.href = "./ProfilePage.html";
+          window.location.href = "./ProfilePage.php?user_name=<?php echo $_SESSION['f_uname'];?>";
         });
       }
       var scrollAnimElements = document.querySelectorAll("[data-animate-on-scroll]");
